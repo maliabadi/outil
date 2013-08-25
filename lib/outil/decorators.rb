@@ -1,18 +1,16 @@
-require 'ruby_decorators'
-
 module Outil
 
-    module Decorators
+  module Decorators
 
-        class Registry < RubyDecorator
+    class Register < RubyDecorators::Decorator
 
-          def call(this, *args, &blk)
-            Outil::Workspace.scan(this.source_location)
-            this.call(*args, &blk)
-          end
-
-        end
+      def call(this, *args, &blk)
+        Outil::Workspace.scan *this.source_location
+        this.call(*args, &blk)
+      end
 
     end
+
+  end
 
 end
