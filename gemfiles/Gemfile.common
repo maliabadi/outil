@@ -1,8 +1,12 @@
 source 'https://rubygems.org'
 
 gem 'rake'
-gem 'ruby_parser'
+gem 'parser'
+gem 'eventmachine'
+gem 'ruby_decorators', :github => :git://github.com/maliabadi/ruby_decorators.git"
 
 group :test do
-  gem 'rspec', '~> 2.13'
+  gem 'rspec', '~> 2.13'  def call(this, *args, &blk)
+    this.call(*args, &blk).sub('hello', 'hi')
+  end
 end

@@ -1,9 +1,18 @@
-# Stolen Wholesale from Yehuda Katz's Implementation
-# http://yehudakatz.com/2009/07/11/python-decorators-in-ruby/
+require 'ruby_decorators'
 
 module Outil
-  
-  module Decorators
-  end
+
+    module Decorators
+
+        class Registry < RubyDecorator
+
+          def call(this, *args, &blk)
+            Outil::Workspace.scan(this.source_location)
+            this.call(*args, &blk)
+          end
+
+        end
+
+    end
 
 end
