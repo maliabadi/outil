@@ -1,17 +1,29 @@
-PATH
-  remote: /Users/mattaliabadi/Desktop/projects/ruby_decorators
+GIT
+  remote: git@github.com:maliabadi/ruby_decorators.git
+  revision: 74fe865abcd450b9824b8396adc694076568c63c
   specs:
     ruby_decorators (0.0.3)
 
 GEM
   remote: https://rubygems.org/
   specs:
+    abstract_type (0.0.6)
+    adamantium (0.1.0)
+      ice_nine (~> 0.9)
+      thread_safe (~> 0.1.2)
     ast (1.1.0)
+    atomic (1.1.10)
+    awesome_print (1.1.0)
+    concord (0.1.4)
+      adamantium (~> 0.1)
+      equalizer (~> 0.0.7)
     diff-lcs (1.2.4)
+    equalizer (0.0.7)
     eventmachine (1.0.3)
-    parser (1.4.2)
-      ast (~> 1.0)
-      slop (~> 3.4)
+    ice_nine (0.9.0)
+    parser (2.0.0.pre6)
+      ast (~> 1.1)
+      slop (~> 3.4, >= 3.4.5)
     rake (10.1.0)
     rspec (2.14.1)
       rspec-core (~> 2.14.0)
@@ -22,13 +34,23 @@ GEM
       diff-lcs (>= 1.1.3, < 2.0)
     rspec-mocks (2.14.3)
     slop (3.4.6)
+    thread_safe (0.1.2)
+      atomic
+    unparser (0.0.17)
+      abstract_type (~> 0.0.6)
+      adamantium (~> 0.1.0)
+      concord (~> 0.1.1)
+      equalizer (~> 0.0.7)
+      parser (~> 2.0.0.pre6)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  awesome_print
   eventmachine
-  parser
+  parser (~> 2.0.0.beta5)
   rake
   rspec (~> 2.13)
   ruby_decorators!
+  unparser
