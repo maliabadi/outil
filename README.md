@@ -41,17 +41,16 @@ By including Outil and calling the "register" decorator, Outil will add the encl
 
 ```ruby
 module SomeOtherProject
-    class MyUnrelatedClass
-        include Outil
+  class MyUnrelatedClass
+    include Outil
 
-        def baz
-            "#{foo} baz"
-        end
-
+    def baz
+      "#{foo} baz"
     end
+  end
 end
 
-another_instance = SomeOtherProject::MyUnrelatedClass.new()
+another_instance = SomeOtherProject::MyUnrelatedClass.new
 another_instance.foo
  => "bar" 
  another_instance.baz
