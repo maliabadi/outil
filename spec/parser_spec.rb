@@ -6,19 +6,59 @@ require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 describe Outil::OCS::ObjectParser do
 
     before do
+        Outil.reset!
         DummyInterface.new.hello
+        @target = build_target_ast
     end
 
-    describe "method registration" do
-        it "should parse the correctly named method" do
-            my_ast = Parser::AST::Node.new(:def,
-                                            children=[:hello,
-                                                      Parser::AST::Node.new(:args),
-                                                      Parser::AST::Node.new(:str,
-                                                                            children=["hello"])])
-            Outil::Workspace.asts[:hello].should eq(my_ast)
-            Outil::Workspace.reset!
+    after do
+        Outil.reset!
+    end
+
+    describe "append" do
+        it "append ast to workspace" do
+            Outil::Workspace.asts[:hello].should eq(@target)
         end
+    end
+
+    describe "initialize" do
+        before do
+            @parser = Outil::OCS::ObjectParser.new(__FILE__, :hello)
+        end
+        
+        it "should set path" do
+            @parser.path.should eq(__FILE__)
+        end
+
+        it "should set name" do
+             @parser.name.should eq(:hello)
+        end
+    end
+
+    describe "node" do
+        before do
+            @parser = build_generic_parser
+        end
+
+        it "should return an ast" do
+            @parser.node.is_a?(Parser::AST::Node).should eq(true)
+        end
+    end
+
+    describe "find" do
+        before do
+            @parser = build_generic_parser
+        end
+
+        it "should locate the named method in the parse tree" do
+            @parser.find.should eq(build_target_ast)
+        end
+
+        it "should set the found instance variable" do
+            @parser.find
+            @parser.found.should eq(build_target_ast)
+        end
+
     end
 
 end

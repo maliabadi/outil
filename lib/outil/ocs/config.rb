@@ -2,6 +2,9 @@ module Outil
   module OCS
     class Config
 
+      INDEX_PATH = '.outil'
+      CONFIG_PATH = '.outil.rc'
+
       def self.home_path
         @home_path ||= File.expand_path(
           File.expand_path(ENV['HOME'] || '~'))
@@ -11,12 +14,16 @@ module Outil
 
       def initialize(params={})
         @params = params
-        infer_path unless @params[:path]
+        infer = Proc.new do |key, const|
+          @params[key] = "#{self.class.home_path}/#{const}"
+        end
+        infer.call(:index, INDEX_PATH)
+        infer.call(:path, CONFIG_PATH)
       end
 
       def options
         @options ||= (
-          unless File.exists?(infer_path)
+          unless File.exists?(@params[:path])
             raise StandardError "Could not locate your Outil Config File"
           end
           indifference = Proc.new do |hash, x|
@@ -24,7 +31,7 @@ module Outil
             hash[x.first.to_sym] = x.last
             hash
           end
-          YAML.load_file(infer_path)
+          YAML.load_file(@params[:path])
             .inject(Hash.new, &indifference)
           )
       end
@@ -36,10 +43,6 @@ module Outil
           end
           Index.new(:path => options[:index])
         )
-      end
-
-      def infer_path
-        @params[:path] = "#{self.class.home_path}/#{Outil::OCS::CONFIG_PATH}"
       end
 
     end

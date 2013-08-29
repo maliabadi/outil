@@ -2,12 +2,12 @@ module Outil
     module OCS
         class ObjectParser
 
-            attr :node, :name, :resolved
+            attr :name, :path, :found
 
             def initialize(path, name)
                 @path = path
                 @name = name
-                @resolved = {}
+                @found = false
             end
 
             def node
@@ -19,6 +19,10 @@ module Outil
             end
 
             def find
+                return @found if @found
+                set_and_stop = Proc.new do |node|
+                    return @found = node
+                end
                 traverse = Proc.new do |node|
                     # if we're not at a node, we can move on
                     next unless node.is_a?(Parser::AST::Node)
@@ -30,11 +34,11 @@ module Outil
                     case node.type
                     when :defs
                         # class methods
-                        return node if node.children[1] == name
+                        set_and_stop.call(node) if node.children[1] == name
                         next
                     when :def
                         # instance method
-                        return node if node.children.first == name
+                        set_and_stop.call(node) if node.children.first == name
                         next
                     else
                         # other kind of object
@@ -47,11 +51,11 @@ module Outil
                         end
                     end
                 end
-                @resolved[name] = begin
-                        traverse.call(node)
-                    rescue
-                        false
-                    end
+                begin
+                    traverse.call(node)
+                rescue
+                    false
+                end
             end
 
         end

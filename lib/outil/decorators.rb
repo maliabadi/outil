@@ -11,6 +11,22 @@ module Outil
 
     end
 
+    class NameSpace
+
+        def initialize(namespace)
+            @namespace = namespace
+        end
+
+        def call(this, *args, &blk)
+            # TODO
+            # Intended behavior is to register the decorated
+            # method under a given namespace, so you can
+            # have two methods named the same thing, etc.
+            this.call(*args, &blk)
+        end
+
+    end
+
   end
 
 end

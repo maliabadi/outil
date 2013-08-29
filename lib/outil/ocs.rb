@@ -4,8 +4,7 @@ module Outil
 
     # Object Control System
 
-    OBJECT_PATH = '.outil'
-    CONFIG_PATH = '.outil.rc'
+
 
     class << self
 
