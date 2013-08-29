@@ -6,6 +6,7 @@ require 'yaml'
 
 $LOAD_PATH.unshift(File.dirname(__FILE__))
 
+require 'outil/version'
 require 'outil/decorators'
 require 'outil/workspace'
 require 'outil/ocs'

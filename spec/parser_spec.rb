@@ -1,6 +1,3 @@
-require 'rubygems'
-require 'awesome_print'
-
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
 describe Outil::OCS::ObjectParser do

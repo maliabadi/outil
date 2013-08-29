@@ -1,19 +1,20 @@
-Gem::Specification.new do |gem|
-  gem.name             = 'outil '
-  s.homepage           = 'http://www.github.com/malibadi/outil'
-  s.summary            = 'Stores persistently available utility functions'
-  s.description        = 'Outil is a library for storing and importing reusable code'
-  s.require_path       = 'lib'
-  s.license            = 'MIT'
-  s.authors            = ['Matt Aliabadi']
-  s.email              = ['mattmaliabadi@gmail.com']
-  s.executables        = ['outil-sync']
-  s.version            = MongoMapper::Version
-  s.platform           = Gem::Platform::RUBY
-  s.files              = Dir.glob("{bin,lib,spec}/**/*")
+require File.expand_path('../lib/outil', __FILE__)
 
-  s.add_dependency 'activemodel',   ">= 3.0.0"
-  s.add_dependency 'activesupport', '>= 3.0'
-  s.add_dependency 'plucky',        '~> 0.6.5'
-  s.add_dependency 'mongo',         '~> 1.8'
+Gem::Specification.new do |gem|
+  gem.name             = 'outil'
+  gem.homepage           = 'http://www.github.com/maliabadi/outil'
+  gem.summary            = 'Stores persistently available utility functions'
+  gem.description        = 'Outil is a library for storing and importing reusable code'
+  gem.require_path       = 'lib'
+  gem.license            = 'MIT'
+  gem.authors            = ['Matt Aliabadi']
+  gem.email              = ['mattmaliabadi@gmail.com']
+  gem.executables        = ['outil-boostrap']
+  gem.version            = Outil::VERSION
+  gem.platform           = Gem::Platform::RUBY
+  gem.files              = Dir.glob("{bin,lib,spec}/**/*")
+
+  gem.add_dependency 'rake'
+  gem.add_dependency 'parser', "~>2.0.0.beta5"
+  gem.add_dependency 'unparser'
 end

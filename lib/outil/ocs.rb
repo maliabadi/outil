@@ -4,20 +4,17 @@ module Outil
 
     # Object Control System
 
-
-
     class << self
 
       def config(params={})
         @config ||= Config.new(params)
       end
 
-      def bootstrap opt={}
-        opt[:config] ||= "#{Dir.home}/#{OBJECT_PATH}"
-        opt[:index] ||= @config.infer_path
-        Dir.mkdir(opt[:index])
-        File.open(opt.delete(:config), 'w+') do |f|
-          f.write opt.to_yml
+      def bootstrap options={}
+        options.merge! Config.new().params
+        Dir.mkdir(options[:index]) unless Dir.exists?(options[:index])
+        File.open(options.delete(:path), 'w+') do |f|
+          f.write options.to_yaml
         end
       end
 

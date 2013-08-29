@@ -1,5 +1,4 @@
 module Outil
-
   module Decorators
 
     class Register < RubyDecorators::Decorator
@@ -24,9 +23,8 @@ module Outil
             # have two methods named the same thing, etc.
             this.call(*args, &blk)
         end
-
+        
     end
 
   end
-
 end
