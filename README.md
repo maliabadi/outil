@@ -31,7 +31,7 @@ end
 
 The functionality of the method isn't changed in your code.
 
-```
+```ruby
 instance = MyClass.new()
 instance.foo
  => "bar" 
@@ -39,7 +39,7 @@ instance.foo
 
 By including Outil and calling the "register" decorator, Outil will add the enclosed method to your universal Outil module called 'foo' that, when included in any project, will behave exactly the way it's written to here.
 
-```
+```ruby
 module SomeOtherProject
     class MyUnrelatedClass
         include Outil
